@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Przeglądaj bilans</title>
+  <link rel="stylesheet" href="style.css" />
+ 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+ 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Personal Budget</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="mb-4">View balance sheet</h1>
+    
+    <div class="mb-3">
+      <label for="periodSelect" class="form-label">Wybierz okres:</label>
+      <select id="periodSelect" class="form-select" style="max-width: 200px;">
+        <option value="7">Last 7 days</option>
+        <option value="30" selected>Last 30 days</option>
+        <option value="90">Last 90 days</option>
+        <option value="365">Last year</option>
+      </select>
+    </div>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Describe</th>
+          <th>Amound</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody id="balanceTableBody">
+        <tr><td>2025-07-01</td><td>Grocery shopping</td><td>-150 PLN</td><td>Expense</td></tr>
+        <tr><td>2025-07-05</td><td>Salary</td><td>+3000 PLN</td><td>Income</td></tr>
+        <tr><td>2025-07-10</td><td>Bills</td><td>-400 PLN</td><td>Expense</td></tr>
+        <tr><td>2025-07-15</td><td>Sale of items</td><td>+500 PLN</td><td>Income</td></tr>
+      </tbody>
+    </table>
+    
+    <div style="max-width: 600px; margin: auto;">
+      <canvas id="balancePieChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+   
+    const data = {
+      labels: ['Expense', 'Income'],
+      datasets: [{
+        data: [550, 3500],
+        backgroundColor: ['#dc3545', '#198754'], 
+        hoverOffset: 30
+      }]
+    };
+
+    const config = {
+      type: 'pie',
+      data: data,
+      options: {
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    };
+
+    const pieChart = new Chart(
+      document.getElementById('balancePieChart'),
+      config
+    );
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
